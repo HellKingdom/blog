@@ -39,26 +39,37 @@ if (device.ios && device.osVersion && ua.indexOf('Version/') >= 0) {
     }
 }
 
-// Webview
-device.webView = (iphone || ipad || ipod) && ua.match(/.*AppleWebKit(?!.*Safari)/i);
-
-// OS classes
-if (device.os) {
-    classNames.push(device.os, device.os + '-' + device.osVersion.split('.')[0], device.os + '-' + device.osVersion.replace(/\./g, '-'));
-    if (device.os === 'ios') {
-        var major = parseInt(device.osVersion.split('.')[0], 10);
-        for (var i = major - 1; i >= 6; i--) {
-            classNames.push('ios-gt-' + i);
-        }
-    }
-
-}
 
 // 当前浏览器是不是微信
-device.isWeixin = /MicroMessenger/i.test(ua);
+device.isWeixin = device.isOpera = device.isChrome = device.isFirefox = device.isAli = device.isSafari = device.isIE = false
 
+if (isOpera) {
+    //判断是否Opera浏览器
+    device.isOpera = true
+} else if (/firefox/.test(ua)) {
+    //判断是否Firefox浏览器
+    device.isFirefox = true
+} else if (/chrome/.test(ua)) {
+    //判断是否chrome浏览器
+    device.isChrome = true
+} else if (/safari/.test(ua)) {
+   //判断是否Safari浏览器
+   device.isSafari = true
+} else if (/compatible/.test(ua) && /msie/.test(ua) && !device.isOpera) {
+    //判断是否IE浏览器
+    device.isIE = true
+} else if (/micromessenger/.test(ua)) {
+    //判断是否为支付宝浏览器
+    device.isWeixin = true
+} else if (/alipayclient/.test(ua)) {
+    //判断是否为支付宝浏览器
+    device.isAli = true
+} else {
+    // 未知类型，作谷歌处理
+    device.isChrome = true
+}
 
 // 当前设备是不是手机端
-device.isMObile = MOBILE_UA_REGEXP = /(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone|Prerender|MicroMessenger)/i.test(window.navigator.userAgent);
+device.isMObile = MOBILE_UA_REGEXP = /(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone|Prerender|MicroMessenger)/i.test(ua);
 
 export default device;
