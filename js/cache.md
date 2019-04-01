@@ -50,7 +50,6 @@
   1、存储机制 DOM Storage
     DOM Storage是类似与cookie的W3C Web 存储规范。它被设计用来提供一个更大存储量（5MB）、更安全、更便捷的存储方法，从而可以代替掉将一些不需要让服务器知道的信息存储到 cookies 里的这种传统方法。它的存储形式是一种key-value的字符串格式，存放在浏览器本地，不会别每一次的请求携带至服务端。
     DOM Storage分为Local Storage和Session Storage。两者的存储方法、存储形式都一样，不同的是Local Storage是没有过期时间的，只要不清除，会一直存放在本地，不会失效。而Session Storage只存储在页面会话中，当页面关闭时，相应的存储信息也会被释放掉。
-    DOM Storage 亦是有其自身的局限性。DOM Storage的值类型限定为string类型，这个在对我们日常比较常见的JSON对象类型需要一些转换；在浏览器的隐身模式下是不可读取的；DOM Storage本质上是对字符串的读取，如果存储内容多的话会消耗内存空间，会导致页面变卡；DOM Storage在部分浏览器上不被支持。
     DOM Storage 提供了以下几种方法：
     ```
     interface Storage { 
@@ -62,4 +61,5 @@
       void clear();
     };
     ```
-  2、Indexed Database
+    DOM Storage 亦是有其自身的局限性。DOM Storage的值类型限定为string类型，这个在对我们日常比较常见的JSON对象类型需要一些转换；在浏览器的隐身模式下是不可读取的；DOM Storage本质上是对字符串的读取，如果存储内容多的话会消耗内存空间，会导致页面变卡；DOM Storage在部分浏览器上不被支持。
+
